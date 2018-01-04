@@ -1,0 +1,236 @@
+﻿<Window x:Class="Pharmacy_Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pharmacy_Project"
+        mc:Ignorable="d"
+        Title="Display Purpose for Project" Height="350" Width="650" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:Pharmacy_ProjectDataSet x:Key="pharmacy_ProjectDataSet"/>
+        <CollectionViewSource x:Key="pRODUCTViewSource" Source="{Binding PRODUCT, Source={StaticResource pharmacy_ProjectDataSet}}"/>
+        <CollectionViewSource x:Key="dELIVERYViewSource" Source="{Binding DELIVERY, Source={StaticResource pharmacy_ProjectDataSet}}"/>
+        <CollectionViewSource x:Key="sUPPLIERViewSource" Source="{Binding SUPPLIER, Source={StaticResource pharmacy_ProjectDataSet}}"/>
+        <CollectionViewSource x:Key="tRANSACTIONViewSource" Source="{Binding TRANSACTION, Source={StaticResource pharmacy_ProjectDataSet}}"/>
+    </Window.Resources>
+    <TabControl SelectedIndex="{Binding Mode=OneWay, Source={StaticResource tRANSACTIONViewSource}}">
+        <TabItem Header="Product">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="178.294"/>
+                    <ColumnDefinition Width="73.706"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Delivery List" FontWeight="Medium" FontSize="20" Padding="5" Grid.ColumnSpan="2"/>
+                <DataGrid Grid.Row="1" x:Name="pRODUCTDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource pRODUCTViewSource}}" Margin="5" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="pRODUCTDataGrid_SelectionChanged" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Width="20" Header="Id" IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Width="110" Header="Product Name"/>
+                        <DataGridTextColumn x:Name="genericNameColumn" Binding="{Binding GenericName}" Width="110" Header="Generic Name"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.29*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" x:Name="helperField1"/>
+                    <Grid Grid.Column="1" x:Name="helperField2"/>
+                    <Grid Grid.Column="2" x:Name="helperField3"/>
+                </Grid>
+                <TextBlock Grid.Column="2" Text="Product Details" FontWeight="Medium" FontSize="20" Padding="5"/>
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Product Name: " FontWeight="Medium"/>
+                            <TextBlock Name="productNameTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Generic Name: " FontWeight="Medium"/>
+                            <TextBlock Name="genericNameTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Type: " FontWeight="Medium"/>
+                            <TextBlock Name="typeTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Form: " FontWeight="Medium"/>
+                            <TextBlock Name="formTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Selling Price: " FontWeight="Medium"/>
+                            <TextBlock Name="sellingPriceTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Buying Price: " FontWeight="Medium"/>
+                            <TextBlock Name="buyingPriceTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Quantity: " FontWeight="Medium"/>
+                            <TextBlock Name="quanityTbx"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Delivery">
+            <Grid DataContext="{StaticResource dELIVERYViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Delivery List" FontWeight="Medium" FontSize="20" Padding="5"/>
+
+                <DataGrid Grid.Row="1" x:Name="dELIVERYDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="dELIVERYDataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="supplierIDColumn" Binding="{Binding SupplierID}" Header="Supplier ID" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="orderDateIDColumn" Binding="{Binding OrderDate,StringFormat='{}{0:MMMM dd, yyyy}'}" Header="Order Date" Width="SizeToHeader"/>
+                        <!--<DataGridTemplateColumn x:Name="orderDateColumn" Header="Order Date" Width="SizeToHeader">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding OrderDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                        <DataGridTemplateColumn x:Name="arrivalDateColumn" Header="Arrival Date" Width="SizeToHeader">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding ArrivalDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock Grid.Column="1" Text="Delivery Details" FontWeight="Medium" FontSize="20" Padding="5"/>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Supplier ID: " FontWeight="Medium"/>
+                            <TextBlock Name="supplierIDTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Order Date: " FontWeight="Medium"/>
+                            <TextBlock Name="orderDateTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Arrival Date: " FontWeight="Medium"/>
+                            <TextBlock Name="arrivalDateTBx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Driver Name: " FontWeight="Medium"/>
+                            <TextBlock Name="driverNameTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Delivery Details: " FontWeight="Medium"/>
+                            <TextBlock Name="deliveryDetailsTbx"/>
+                        </StackPanel>
+                        <!--<StackPanel Orientation="Horizontal">
+                            <Button Height="20" Width="100" Content="TEST" x:Name="BtnTest" Click="BtnTest_Click"/>
+                        </StackPanel>-->
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Supplier">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Supplier List" FontWeight="Medium" FontSize="20" Padding="5"/>
+                <DataGrid Grid.Column="0" x:Name="sUPPLIERDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource sUPPLIERViewSource}}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1" SelectionChanged="sUPPLIERDataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="idColumn2" Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="supplierNameColumn" Binding="{Binding SupplierName}" Header="Supplier Name" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="supplierDetailsColumn" Binding="{Binding SupplierDetails}" Header="Supplier Details" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <TextBlock Grid.Column="1" Text="Supplier Details" FontWeight="Medium" FontSize="20" Padding="5"/>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Supplier Name: " FontWeight="Medium"/>
+                            <TextBlock Name="supplierNameTbx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Supplier Details: " FontWeight="Medium"/>
+                            <TextBlock Name="supplierDetailsTbx"/>
+                        </StackPanel>
+
+
+                    </StackPanel>
+                </Grid>
+
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Test">
+            <Grid DataContext="{StaticResource tRANSACTIONViewSource}" Margin="-171,-103,171,103">
+                <ListView x:Name="tRANSACTIONListView" ItemsSource="{Binding}" Margin="190,122,46,-31" SelectionMode="Single">
+                    <ListView.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="idColumn3" Header="Id" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="6,-1,-6,-1" Text="{Binding Id, Mode=OneWay}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn x:Name="transactionDateColumn" Header="Transaction Date" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker Margin="-6,-1" SelectedDate="{Binding TransactionDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}">
+                                            <DatePicker.Resources>
+                                                <Style TargetType="DatePickerTextBox">
+                                                    <Setter Property="IsReadOnly" Value="True"/>
+                                                </Style>
+                                            </DatePicker.Resources>
+                                        </DatePicker>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn x:Name="userIDColumn" Header="User ID" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker Margin="-6,-1" Text="{Binding UserID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}">
+                                            <DatePicker.Resources>
+                                                <Style TargetType="DatePickerTextBox">
+                                                    <Setter Property="IsReadOnly" Value="True"/>
+                                                </Style>
+                                            </DatePicker.Resources>
+                                        </DatePicker>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
