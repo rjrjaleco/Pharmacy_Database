@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\App.xaml
-11151548125
+4-2088271143
 2315133374
-13303353679
+21544751003
 14598183689
-MainWindow.xaml;
+AddNewDeliveryWindow.xaml;AddNewProductWindow.xaml;AddNewSupplierWindow.xaml;MainWindow.xaml;
 
-True
+False
 
