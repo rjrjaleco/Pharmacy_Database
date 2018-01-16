@@ -25,14 +25,23 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Delivery List" FontWeight="Medium" FontSize="20" Padding="5" Grid.ColumnSpan="2"/>
-                <DataGrid Grid.Row="1" x:Name="pRODUCTDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource pRODUCTViewSource}}" Margin="5" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="pRODUCTDataGrid_SelectionChanged" Grid.ColumnSpan="2">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Width="20" Header="Id" IsReadOnly="True"/>
-                        <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Width="110" Header="Product Name"/>
-                        <DataGridTextColumn x:Name="genericNameColumn" Binding="{Binding GenericName}" Width="110" Header="Generic Name"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <TextBlock Text="Delivery List" FontWeight="Medium" FontSize="20" Padding="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Grid.ColumnSpan="2">
+                    <Button Click="addProductButton_Click" x:Name="addProductButton" Background="Transparent" BorderThickness="2" >
+                        <Button.Content>
+                            <Path Width="10" Height="10" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="#FF000000" Data="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z "/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <ListView Grid.Row="1" x:Name="pRODUCTDataGrid" ItemsSource="{Binding Source={StaticResource pRODUCTViewSource}}" Margin="5" SelectionChanged="pRODUCTDataGrid_SelectionChanged" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="idColumn" DisplayMemberBinding="{Binding Id}" Width="20" Header="Id"/>
+                            <GridViewColumn x:Name="productNameColumn" DisplayMemberBinding="{Binding ProductName}" Width="110" Header="Product Name"/>
+                            <GridViewColumn x:Name="genericNameColumn" DisplayMemberBinding="{Binding GenericName}" Width="110" Header="Generic Name"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Grid Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.29*"/>
@@ -81,39 +90,49 @@
         <TabItem Header="Delivery">
             <Grid DataContext="{StaticResource dELIVERYViewSource}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="28.262"/>
+                    <ColumnDefinition Width="206.738"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Delivery List" FontWeight="Medium" FontSize="20" Padding="5"/>
-
-                <DataGrid Grid.Row="1" x:Name="dELIVERYDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="dELIVERYDataGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="supplierIDColumn" Binding="{Binding SupplierID}" Header="Supplier ID" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="orderDateIDColumn" Binding="{Binding OrderDate,StringFormat='{}{0:MMMM dd, yyyy}'}" Header="Order Date" Width="SizeToHeader"/>
-                        <!--<DataGridTemplateColumn x:Name="orderDateColumn" Header="Order Date" Width="SizeToHeader">
+                <TextBlock Text="Delivery List" FontWeight="Medium" FontSize="20" Padding="5" Grid.ColumnSpan="2"/>
+                <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Grid.ColumnSpan="2">
+                    <Button Click="addDeliveryButton_Click" x:Name="addDeliveryButton" Background="Transparent" BorderThickness="2" >
+                        <Button.Content>
+                            <Path Width="10" Height="10" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="#FF000000" Data="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z "/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <ListView Grid.Row="1" x:Name="dELIVERYDataGrid" ItemsSource="{Binding}" Margin="10" SelectionChanged="dELIVERYDataGrid_SelectionChanged" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="idColumn1" DisplayMemberBinding="{Binding Id}" Header="Id" />
+                            <GridViewColumn x:Name="supplierIDColumn" DisplayMemberBinding="{Binding SupplierID}" Header="Supplier ID" />
+                            <GridViewColumn x:Name="orderDateIDColumn" DisplayMemberBinding="{Binding OrderDate,StringFormat='{}{0:MMMM dd, yyyy}'}" Header="Order Date" />
+                            <GridViewColumn x:Name="arrivalDateColumn" DisplayMemberBinding="{Binding ArrivalDate,StringFormat='{}{0:MMMM dd, yyyy}'}" Header="Arrival Date"/>
+                            <!--<DataGridTemplateColumn x:Name="orderDateColumn" Header="Order Date" Width="SizeToHeader">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DatePicker SelectedDate="{Binding OrderDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>-->
-                        <DataGridTemplateColumn x:Name="arrivalDateColumn" Header="Arrival Date" Width="SizeToHeader">
+                            <!--<DataGridTemplateColumn x:Name="arrivalDateColumn" Header="Arrival Date" Width="SizeToHeader">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DatePicker SelectedDate="{Binding ArrivalDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                        </DataGridTemplateColumn>-->
+                        </GridView>
+                    </ListView.View>
+                </ListView>
 
-                <TextBlock Grid.Column="1" Text="Delivery Details" FontWeight="Medium" FontSize="20" Padding="5"/>
-                <Grid Grid.Column="1" Grid.Row="1">
+                <TextBlock Grid.Column="2" Text="Delivery Details" FontWeight="Medium" FontSize="20" Padding="5"/>
+                <Grid Grid.Column="2" Grid.Row="1">
                     <StackPanel >
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Supplier ID: " FontWeight="Medium"/>
@@ -135,7 +154,9 @@
                             <TextBlock Text="Delivery Details: " FontWeight="Medium"/>
                             <TextBlock Name="deliveryDetailsTbx"/>
                         </StackPanel>
-
+                        <!--<StackPanel Orientation="Horizontal">
+                            <Button Height="20" Width="100" Content="TEST" x:Name="BtnTest" Click="BtnTest_Click"/>
+                        </StackPanel>-->
                     </StackPanel>
                 </Grid>
 
@@ -152,13 +173,22 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Supplier List" FontWeight="Medium" FontSize="20" Padding="5"/>
-                <DataGrid Grid.Column="0" x:Name="sUPPLIERDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource sUPPLIERViewSource}}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1" SelectionChanged="sUPPLIERDataGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="idColumn2" Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="supplierNameColumn" Binding="{Binding SupplierName}" Header="Supplier Name" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="supplierDetailsColumn" Binding="{Binding SupplierDetails}" Header="Supplier Details" Width="SizeToHeader"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5">
+                    <Button Click="addSupplierButton_Click"  x:Name="addSupplierButton" Background="Transparent" BorderThickness="2" >
+                        <Button.Content>
+                            <Path Width="10" Height="10" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="#FF000000" Data="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z "/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <ListView Grid.Column="0" x:Name="sUPPLIERDataGrid" ItemsSource="{Binding Source={StaticResource sUPPLIERViewSource}}" Margin="10" Grid.Row="1" SelectionChanged="sUPPLIERDataGrid_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="idColumn2" DisplayMemberBinding="{Binding Id}" Header="Id"/>
+                            <GridViewColumn x:Name="supplierNameColumn" DisplayMemberBinding="{Binding SupplierName}" Header="Supplier Name" />
+                            <GridViewColumn x:Name="supplierDetailsColumn" DisplayMemberBinding="{Binding SupplierDetails}" Header="Supplier Details" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
 
 
                 <TextBlock Grid.Column="1" Text="Supplier Details" FontWeight="Medium" FontSize="20" Padding="5"/>

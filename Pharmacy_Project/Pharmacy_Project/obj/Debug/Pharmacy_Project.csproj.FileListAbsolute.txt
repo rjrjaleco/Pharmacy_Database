@@ -16,3 +16,9 @@ C:\Users\rjrjaleco\Documents\Visual Studio 2015\Projects\Pharmacy_Project\Pharma
 C:\Users\rjrjaleco\Documents\Visual Studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\Pharmacy_Project.exe
 C:\Users\rjrjaleco\Documents\Visual Studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\Pharmacy_Project.pdb
 C:\Users\rjrjaleco\Documents\Visual Studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\AddNewDeliveryWindow.g.cs
+C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\AddNewProductWindow.g.cs
+C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\AddNewSupplierWindow.g.cs
+C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\AddNewDeliveryWindow.baml
+C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\AddNewProductWindow.baml
+C:\Users\rjrjaleco\documents\visual studio 2015\Projects\Pharmacy_Project\Pharmacy_Project\obj\Debug\AddNewSupplierWindow.baml
